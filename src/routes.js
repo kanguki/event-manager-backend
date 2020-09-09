@@ -1,16 +1,16 @@
 const express = require('express')
 const multer = require('multer')
+const routes = express.Router()
+const upload = multer(uploadConfig)
 
+const uploadConfig = require('./config/upload')
 const UserController = require('./controllers/UserController')
 const EventController = require('./controllers/EventController')
 const EventDashboard = require('./controllers/EventDashboard')
 const LoginController = require('./controllers/LoginController')
-const uploadConfig = require('./config/upload')
 const RegistrationController = require('./controllers/RegistrationController')
 const TrackRegistration = require('./controllers/TrackRegistration')
 
-const routes = express.Router()
-const upload = multer(uploadConfig)
 
 routes.get('/status', (req, res) => {
     res.send({status: 200})
@@ -34,7 +34,7 @@ routes.post('/registration/:registration_id/reject', TrackRegistration.rejection
 
 
 //login
-routes.post('/sign-in',LoginController.authenticate)
+routes.post('/login',LoginController.authenticate)
 
 //Dashboard
 routes.get('/dashboard/:activity', EventDashboard.getEventsThatHasActivityXXX)
