@@ -15,7 +15,7 @@ module.exports = LoginController = {
             const user = await User.findOne({ email }) //===find({email: email})
             if (!user) {
                 return res.status(200).json(
-                    { message: `User not found. Do you want to login instead?` })
+                    { message: `User not found. Do you want to register instead?` })
             }
             //CHECK IF PASSWORD MATCHES EMAIL OR NOT
             if (user && await bcrypt.compare(password, user.password)) {

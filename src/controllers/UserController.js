@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 module.exports = UserController = {
     addNewUser: async (req, res) => {
-        try {            
+        try {                        
             //destruct from req.body
             const { firstName, lastName, email, password } = req.body
             const existedUser = await User.findOne({email})
@@ -24,7 +24,7 @@ module.exports = UserController = {
             }
 
             return res.status(400).json({
-                message: 'email/user already exist!'
+                message: 'Email/User already exists!'
             })
 
         } catch (err) {
