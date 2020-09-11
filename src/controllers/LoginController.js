@@ -26,6 +26,8 @@ module.exports = LoginController = {
                     firstName: user.firstName,
                     lastName: user.lastName
                 }
+                //when signing, we make payloadData including information of user
+                // in other words, token holds information of loggedInUser
                 return jwt.sign({ user: loggedInUser }, 'secret', (err, token) => {
                     return res.json({
                         token: token,

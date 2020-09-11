@@ -1,6 +1,7 @@
 const express = require('express')
 const multer = require('multer')
 const uploadConfig = require('./config/upload')
+const verifyToken = require('./config/verifytoken')
 
 const UserController = require('./controllers/UserController')
 const EventController = require('./controllers/EventController')
@@ -38,13 +39,13 @@ routes.post('/login',LoginController.authenticate)
 
 //Dashboard
 routes.get('/dashboard/:activity', EventDashboard.getEventsThatHasActivityXXX)
-routes.get('/dashboard', EventDashboard.getAllEvents)
-routes.get('/events/yourEvents', EventDashboard.getEventByUserId)
-routes.get('/events/:event_id', EventDashboard.getEventByUserId)
+routes.get('/dashboard',  EventDashboard.getAllEvents)
+routes.get('/events/yourEvents', verifyToken, EventDashboard.getEventByUserId)
+routes.get('/events/:event_id',  EventDashboard.getEventById)
 
 //Event
-routes.post('/events/add', upload.single("thumbnail"), EventController.addNewEvent)
-routes.delete('/events/remove/:eventId',EventController.deleteEventById)
+routes.post('/events/add',verifyToken, upload.single("thumbnail"), EventController.addNewEvent)
+routes.delete('/events/remove/:eventId',verifyToken,EventController.deleteEventById)
 
 
 //User
