@@ -19,6 +19,18 @@ app.use('/files', express.static(path.resolve(__dirname, "..", "files")))
 app.use(routes)
 
 
+//TODO: add JWT token
+//TODO: Return token when login
+//TODO: Send token on request
+//TODO:Create function to protect routers
+//TODO:Add function/middleware to routers
+//TODO: modify response to decode the token
+
+
+
+
+
+
 //below is how we can connect to the database and listen to a port
 try {
     mongoose.connect(process.env.MONGO_DB_CONNECTION, {

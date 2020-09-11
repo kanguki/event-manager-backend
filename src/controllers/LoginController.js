@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 //we can do module.exports = {...} without the name LoginController
 module.exports = LoginController = {
@@ -25,7 +26,13 @@ module.exports = LoginController = {
                     firstName: user.firstName,
                     lastName: user.lastName
                 }
-                return res.json(loggedInUser)
+                return jwt.sign({ user: loggedInUser }, 'secret', (err, token) => {
+                    return res.json({
+                        token: token,
+                        user_id: loggedInUser._id
+                    })
+                })
+                //return res.json(loggedInUser)
             } else {
                 res.status(404).json({message: `Email / Password is invalid`})
             }
