@@ -12,6 +12,17 @@ module.exports = EventDashboard = {
             return res.status(404).json({ message: `There are not any events right now` })
         }
     },
+    getEventByUserId: async (req, res) => {
+        const { user_id } = req.headers
+        try {
+            const event = await Event.find({user_id})
+            if (event) {
+                return res.json(event)
+            }            
+        } catch (error) {
+            return res.status(404).json({ message: `You haven't created any events yet` })
+        }
+    },
     getEventById: async (req, res) => {
         const { event_id } = req.params
         try {
@@ -20,7 +31,7 @@ module.exports = EventDashboard = {
                 return res.json(event)
             }            
         } catch (error) {
-            return res.status(404).json({ message: `Event does not exist` })
+            return res.status(404).json({ message: `Something went wrong` })
         }
     },
     getEventsThatHasActivityXXX: async (req, res) => {

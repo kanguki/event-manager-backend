@@ -39,7 +39,8 @@ routes.post('/login',LoginController.authenticate)
 //Dashboard
 routes.get('/dashboard/:activity', EventDashboard.getEventsThatHasActivityXXX)
 routes.get('/dashboard', EventDashboard.getAllEvents)
-routes.get('/events/:eventId', EventDashboard.getEventById)
+routes.get('/events/yourEvents', EventDashboard.getEventByUserId)
+routes.get('/events/:event_id', EventDashboard.getEventByUserId)
 
 //Event
 routes.post('/events/add', upload.single("thumbnail"), EventController.addNewEvent)
