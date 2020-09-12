@@ -10,7 +10,7 @@ const RegistrationSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Event'
     },
-    date: Date,
+    date: ()=>Date.now(),
     approved: Boolean
 })
 

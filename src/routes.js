@@ -19,15 +19,8 @@ routes.get('/status', (req, res) => {
 
 
 
-//TODO: registration Approval cotroller
-//TODO: registration Rejection controller
-
-
-
-
-
 //Registration
-routes.post('/registration/add/:event_id',RegistrationController.addNewRegistration)
+routes.post('/registration/register/:event_id',verifyToken,RegistrationController.addNewRegistration)
 routes.get('/registration/:registration_id', RegistrationController.getRegistrationById)
 routes.post('/registration/:registration_id/approve', TrackRegistration.approval)
 routes.post('/registration/:registration_id/reject', TrackRegistration.rejection)
