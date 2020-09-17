@@ -22,7 +22,7 @@ module.exports = UserController = {
                 })    
                 
                 jwt.sign({ user: user._id }, 'secret', { expiresIn: '2d' }, async (err, payloadData) => {
-                    const url = `https://uki-event-manager.herokuapp.com/confirm-email-success/${payloadData}`
+                    const url = `https://eman-event-manager.herokuapp.com/confirm-email-success/${payloadData}`
                     let transporter = nodemailer.createTransport({
                         service: "Gmail",
                         auth: {
@@ -60,7 +60,7 @@ module.exports = UserController = {
         const { email } = req.body
         const userNotyetConfirmed = await User.findOne({ email })
         jwt.sign({ user: userNotyetConfirmed._id }, 'secret', async (err, payloadData) => {
-            const url = `https://uki-event-manager.herokuapp.com/confirm-email-success/${payloadData}`
+            const url = `https://eman-event-manager.herokuapp.com/confirm-email-success/${payloadData}`
                     let transporter = nodemailer.createTransport({
                         service: "Gmail",
                         auth: {
