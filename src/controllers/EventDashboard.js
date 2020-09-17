@@ -26,6 +26,7 @@ module.exports = EventDashboard = {
                     //payloadData is not formed based on regular response, it's based on 
                     //when we logged in (jwt.sign(....))
                     //payloadData is kind of holding information of logged-in user
+                    //when signing : jwt.sign({abc: 'efg'}) we can access payloadData.abc when we verify successfully
                     //as when logging in, we decode our data in token-body, and we
                     //can't change that pieces of data, so it's secured
 
@@ -44,8 +45,11 @@ module.exports = EventDashboard = {
         const { event_id } = req.params
         try {
             const event = await Event.findById(event_id)
-            if (event) {
+            const user = await User.findById(event.user_id)
+            if (event && user) {
                 return res.json(event)
+            } else if (event && !user) {
+                return res.json(`User might have deleted account! Please remove this registration`)
             }            
         } catch (error) {
             return res.status(404).json({ message: `Something went wrong` })

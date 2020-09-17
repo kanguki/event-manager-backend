@@ -1,4 +1,5 @@
 const Registration = require('../models/Registration')
+const Event = require('../models/Event')
 
 module.exports = ApproveRegistration = {
     approval: async (req, res) => {

@@ -1,6 +1,6 @@
 const { JsonWebTokenError } = require('jsonwebtoken')
 const Event = require('../models/Event')
-const User = require('../models/User')
+const Registration = require('../models/Registration')
 const jwt = require('jsonwebtoken')
 
 module.exports = EventController = {
@@ -9,14 +9,16 @@ module.exports = EventController = {
             if (err) {
                 res.sendStatus(401)
             }else {               
-                const { title, description, price, activity, date } = req.body 
-                const { filename  } = req.file               
+                const { title, description, price, activity, date, thumbnail } = req.body 
+                // const { filename  } = req.file     
+                
                 try {
                     const event = await Event.create({
-                        title, description, activity, date,
+                        title, description, date, thumbnail,
                         price: parseFloat(price),   //parse item named price that we passed in req.body 
-                        thumbnail: filename,
-                        user_id: payloadData.user._id
+                        // thumbnail: filename,
+                        user_id: payloadData.user._id,
+                        activity: activity.toLowerCase()
                     })
                     return res.json(event)
                 } catch (error) {
@@ -34,7 +36,8 @@ module.exports = EventController = {
             } else {
                 try {
                     await Event.findByIdAndDelete(eventId)
-                    return res.status(204).send(`Successfully delete event ${eventId}`)
+                    await Registration.deleteMany({event_id: eventId})
+                    return res.json(`Successfully delete event ${eventId}`)
                 } catch (error) {
                     return res.status(400).send(`We can't find event that you're looking for. It may be removed before...` )
                 }
