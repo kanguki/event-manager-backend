@@ -24,7 +24,7 @@ try {
         useFindAndModify: false,
         useCreateIndex: true
     })
-    console.log('MongoDb connected')
+    
 } catch (err) {
     console.log(err)
 }
