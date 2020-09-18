@@ -5,10 +5,10 @@ const UserSchema = new mongoose.Schema({
     lastName: String,
     email: String,
     password: String,
-    confirmed: {
-        type: Boolean,
-        defaultValue: false
-    }
+    // confirmed: {
+    //     type: Boolean,
+    //     defaultValue: false
+    // }
 })
 
 module.exports = mongoose.model('User',UserSchema)

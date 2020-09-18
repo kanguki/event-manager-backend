@@ -49,7 +49,7 @@ app.use(cors())
 //return a middleware passing json as a response
 app.use(express.json())
 //serve files to client
-app.use('/files', express.static(path.resolve(__dirname, "..", "files")))
+// app.use('/files', express.static(path.resolve(__dirname, "..", "files")))
 app.use(routes)
 
 

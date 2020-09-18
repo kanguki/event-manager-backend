@@ -14,15 +14,9 @@ module.exports = LoginController = {
             //CHECK IF USER IS AVAILABLE
             const user = await User.findOne({ email }) //===find({email: email})
             if (!user) {
-                return res.json(
-                    {
-                        message: `User not found. Do you want to sign up instead?`    })
-            } else if (!user.confirmed) {
-                return res.json(
-                    {   message: `Please confirm your email`,
-                        wantToConfirm: true })
+                return res.json( { message: `User not found. Do you want to sign up instead?`    })
             }
-            
+
             //CHECK IF PASSWORD MATCHES EMAIL OR NOT
             if (user && await bcrypt.compare(password, user.password )) {
                 const loggedInUser = {
@@ -39,6 +33,12 @@ module.exports = LoginController = {
                         user_id: loggedInUser._id
                     })
                 })
+                // else if (!user.confirmed) {
+                //     return res.json(
+                //         {   message: `Please confirm your email`,
+                //             wantToConfirm: true })
+                // }
+            
                 //return res.json(loggedInUser)
             } 
             else {

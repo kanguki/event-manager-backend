@@ -54,6 +54,6 @@ routes.post('/sign-up', UserController.addNewUser)
 routes.get('/users/user/id',verifyToken, UserController.getUserById)
 routes.get('/users', UserController.getAllUsers)
 routes.delete('/user/my-account', verifyToken, UserController.deleteUserById)
-routes.get('/confirm-email-success/:token',UserController.confirm)
-routes.post('/reconfirm-email', UserController.getReconfirm)
+// routes.get('/confirm-email-success/:token',UserController.confirm)
+// routes.post('/reconfirm-email', UserController.getReconfirm)
 module.exports = routes
