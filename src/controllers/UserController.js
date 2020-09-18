@@ -31,7 +31,7 @@ module.exports = UserController = {
                     return res.json({
                         token: token,
                         user_id: newUser._id,
-                        firstName: newUser.firstName
+                        name: newUser.firstName
                     })
                 })
             }   else {
